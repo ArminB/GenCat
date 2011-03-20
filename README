@@ -1,0 +1,9 @@
+GenCat is supposed to be a utility to manage and organize 
+collections of files of a given type, e.g. documents or mp3.
+It collects information from file names, properties, 
+tags, meta information ... whatever is associated with the files
+and builds up a searchable database or a structured directory listing, 
+like an index html file.
+It shall be easily extendable for new file types, by adding classes for each file type
+that implements a given interface.
+A sorted list of regular expressions is used to fill the output fields.
