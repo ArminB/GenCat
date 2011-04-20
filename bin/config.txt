@@ -1,0 +1,5 @@
+// this is a comment line
+// syntax is like the next line
+// keyword := value
+bla := schubiduba
+filemask :=.+(.class)

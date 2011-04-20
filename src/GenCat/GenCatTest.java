@@ -41,8 +41,8 @@ public class GenCatTest {
 	 */
 	@Test
 	public void testTestMain() {
-		String[] args = {"-d:D:\\Dokumente und Einstellungen\\Armin\\Eigene Dateien\\Eigene Musik\\PDF\\",
-				         "-f:.+(pdf|PDF)"};
+		String[] args = {"-d:bin",
+				         "-c:config.txt"};
 		try {
 			Shell.main(args);
 		} catch (Exception e) {

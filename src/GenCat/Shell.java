@@ -24,7 +24,7 @@ public class Shell {
 			return;
 		}
 		File mDirectory = null;
-		String mfileMask = null;
+		File mConfig = null;
 		// System.out.println("usage: GenCat -d:[\"]directory[\"]");
 		for(int i = 0; i < args.length; i++) {
 			
@@ -45,22 +45,33 @@ public class Shell {
 				System.out.println(result[1]);
 			}
 			
-			if (java.util.regex.Pattern.matches("-f:.+",args[i])) {
-				java.util.regex.Pattern p = Pattern.compile("-f:");
+			
+			if (java.util.regex.Pattern.matches("-c:.+",args[i])) {
+				java.util.regex.Pattern p = Pattern.compile("-c:");
 				String[] result = p.split(args[i]);
-				mfileMask= result[1];
-				p = Pattern.compile(result[1]);
-				//TODO: loop over files
-				java.util.regex.Matcher m = p.matcher(""); // TODO: match fielname
-				if (m.matches())
-				{
-				
+				mConfig= new File(result[1]);
+				if (!mConfig.isAbsolute()) {
+					mConfig = new File(mDirectory.getAbsolutePath()+ File.separatorChar + mConfig.getName());
 				}
+
+				if (! mConfig.exists()) 
+				{
+					System.out.println(mConfig.getAbsoluteFile());
+					System.out.println(" does not exist!");
+					throw (new Exception("no config file argument"));
+				}
+				if (mConfig.isDirectory()) { // workaround for isDirectory returns incorrect false
+					System.out.println(" is a directory");
+					throw (new Exception("no valid config file argument"));
+				}
+				System.out.print("Configuration: ");
+				System.out.println(mConfig.getPath());
 			}
+
 		}
 		GenCat gc = null;
-		if ((mDirectory != null) && (mfileMask != null)) {
-			 gc = new GenCat(mDirectory,mfileMask);
+		if ((mDirectory != null)  && (mConfig != null)) {
+			 gc = new GenCat(mDirectory, mConfig);
 		}
 		else return;
 	}
